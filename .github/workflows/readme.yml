@@ -1,0 +1,28 @@
+name: Update Profile README
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Update README
+        run: echo $(date +%Y-%m-%d) >> README.md
+
+      - name: Commit and push
+        run: |
+          git config --local user.email "pax.rwm@outlook.com"
+          git config --local user.name "Richard-wmw"
+          git add README.md
+          git commit -m "@Artist-MOBAI" || true
+          git push
